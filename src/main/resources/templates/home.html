@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Data Mahasiswa</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9fafb; margin: 0; padding: 0; color: #1f2937; }
+        .navbar { background-color: #1e3a8a; color: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .navbar h1 { margin: 0; font-size: 1.4rem; font-weight: 600; }
+        .content { padding: 2rem 5%; max-width: 1200px; margin: 0 auto; }
+        .welcome-card { background: linear-gradient(135deg, #eff6ff, #dbeafe); border-left: 5px solid #3b82f6; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        .welcome-card h2 { margin-top: 0; margin-bottom: 0.5rem; color: #1e3a8a; }
+        .welcome-card p { margin: 0; color: #4b5563; }
+        .action-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+        .action-bar h3 { margin: 0; font-size: 1.3rem; }
+        .btn { text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; display: inline-block; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-primary { background-color: #3b82f6; color: white; }
+        .btn-primary:hover { background-color: #2563eb; }
+        .btn-danger { background-color: #ef4444; color: white; }
+        .btn-danger:hover { background-color: #dc2626; }
+        .table-container { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e5e7eb; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        th { background-color: #f3f4f6; font-weight: 600; color: #374151; }
+        tr:hover { background-color: #f9fafb; }
+        .empty-state { text-align: center; padding: 2.5rem; color: #6b7280; font-style: italic; }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <h1>Website Mahasiswa</h1>
+    <a href="/logout" class="btn btn-danger">Logout</a>
+</div>
+
+<div class="content">
+    <div class="welcome-card">
+        <h2>Selamat datang di aplikasi!</h2>
+        <p>Sistem Manajemen Data Mahasiswa Temporary</p>
+    </div>
+
+    <div class="action-bar">
+        <h3>Data Mahasiswa</h3>
+        <a href="/form" class="btn btn-primary">+ Input Data Mahasiswa</a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>NIM</th>
+                <th>Jenis Kelamin</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mhs, iterStat : ${mahasiswaList}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${mhs.nama}"></td>
+                <td th:text="${mhs.nim}"></td>
+                <td th:text="${mhs.jenisKelamin}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(mahasiswaList)}">
+                <td colspan="4" class="empty-state">Belum ada data mahasiswa.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
